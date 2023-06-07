@@ -36,17 +36,57 @@ void loop()
   servov = servoverti.read();
 
 // odczyt  wartości analogowych (wartość napięcia proporcjonalna do oświetlenia odpowiedniego fotorezystora)
+ int TopLeft = analogRead(ldrtopl);
+ int TopRight = analogRead(ldrtopr);
+ int BottomLeft = analogRead(ldrbotl);
+ int BottomRight = analogRead(ldrbotr);
    //średnia wartości sygnałów fotorezystorów górnego rzędu
+   double AverageTop = (TopLeft + TopRight) / 2.0;
   //średnia wartości sygnałów fotorezystorów dolnego rzędu
+  double AverageBot = (BottomLeft + BottomRight) / 2.0;
   //średnia wartości sygnałów fotorezystorów lewej kolumny
+  double AverageLeft = (BottomLeft + TopLeft) / 2.0;
  //średnia wartości sygnałów fotorezystorów prawej kolumny
+ double AverageRight = (BottomRight + TopRight) / 2.0;
   // wyświetlenie wartości sygnałów odczytanych z wejść analogowych, do których są dołączone fotorezystory
+  Serial.println("TOP LEFT");
+  Serial.println(TopLeft);
+   Serial.println("TOP RIGHT");
+  Serial.println(TopRight);
+  Serial.println("BOTTOM LEFT");
+  Serial.println(BottomLeft);
+  Serial.println("BOTTOM RIGHT");
+  Serial.println(BottomRight);
   // wyświetlenie wartości sygnałów odczytanych z wejść analogowych, kreślarka
  
   // główny program sterowanie
    
   // porównanie średniej sygnałów fotorezystorów górnego i dolnego rzędu odpowiada za sterowanie osią elewacji (pion)
+  if(AverageTop > AverageBot)
   {
+    if(servov < servovLimitLow)
+    {
+      servov = servovLimitLow;
+    }
+    servoverti.write(servov +1);
+    delay(100); 
+  }
+  else if(AverageTop < AverageBot)
+  {
+     if(servov > servovLimitHigh)
+    {
+      servov = servovLimitHigh;
+    }
+    servoverti.write(servov -1);
+    delay(100); 
+  }
+  else
+  {
+    servoverti.write(servov);
+    delay(100);
+  }
+  
+  /*{
     servoverti.write(servov +1);  // wartośc poprzednia plus 1 i wysłanie jej na serwo
       // jeżeli wartość sygnału sterującego serwomechnizmem jest poniżej dolnego ograniczenia
     // ustawienie wartosći sygnału sterującego serwomechnizmem na poziomie dolnego ograniczenia
@@ -58,11 +98,36 @@ void loop()
    // ustawienie wartosći sygnału sterującego serwomechnizmem na poziomie dolnego ograniczenia
     delay(10);                  // opóżnienie umożliwiające osiągnięcie przez serwomechanizm zadanaj pozycji
     servoverti.write(servov);    //zmiana sygnalu sterującego serwomechanizmu
-  }
-   // porównanie średniej sygnałów fotorezystorów lewej i prawej kolumny odpowiada za sterowanie osią azymutu (poziom)
+  }*/
+   // porównanie średniej sygnałów fotorezystorów lewej i prawej kolumny odpowiada za sterowanie osią azymutu (poziom)4
+   
+   if(AverageLeft > AverageRight)
   {
+    if(servoh < servohLimitLow)
+    {
+      servoh = servohLimitLow;
+    }
+    servohori.write(servoh +1);
+    delay(100); 
+  }
+  else if(AverageLeft < AverageRight)
+  {
+     if(servoh > servohLimitHigh)
+    {
+      servoh = servohLimitHigh;
+    }
+    servohori.write(servoh -1);
+    delay(100); 
+  }
+  else
+  {
+    servohori.write(servoh);
+    delay(100);
+  }
+   
+  /*{
     servohori.write(servoh +1);      // ruch w górę
     servohori.write(servoh);    //zmiana sygnalu sterującego serwomechanizmu
-  }
-  delay(50);
+  }*/
+  //delay(2000);
 }
