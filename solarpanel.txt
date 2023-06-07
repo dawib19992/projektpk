@@ -1,0 +1,68 @@
+#include <Servo.h>
+
+Servo servohori;
+int servoh = 110;
+int servohLimitHigh = 160;
+int servohLimitLow = 60;
+
+Servo servoverti; 
+int servov = 110; 
+int servovLimitHigh = 160; 
+int servovLimitLow = 60;
+
+// zdefiniowanie zmiennych oznaczających numery wyprowadzeń,
+// do których są dołączone fotorezystory
+int ldrtopl = 1; //top left 
+int ldrtopr = 2; //top right 
+int ldrbotl = 4; // bottom left 
+int ldrbotr = 3; // bottom right 
+
+// fukcja inicjalizująca działanie układu Arduino
+// funkcja zawiera sekwencję operacji wykonywanych w programie jednorazowo
+ void setup () 
+ {
+  servohori.write(110);  // ustalenie początkowej pozycji serwomechanizmu pracującego w poziomie
+  servoverti.write(110); // ustalenie początkowej pozycji serwomechanizmu pracującego w pionie
+  servohori.attach(11); // przypisanie do wyprowadzenia 11 układu Arduino sygnału sterującego serwomechanizmem działającym w poziomie
+  servoverti.attach(10);// przypisanie do wyprowadzenia 11 układu Arduino sygnału sterującego serwomechanizmem działającym w pionie
+  Serial.begin(9600);   // ustawienie parametrów działania portu szeregowego układu Arduino
+  delay(500);
+// opóźnienie przed rozpoczęciem działania cyklicznej części programu  
+ }
+// funkcja zawierająca powtarzalne elementy programu
+void loop()
+{
+  servoh = servohori.read();
+  servov = servoverti.read();
+
+// odczyt  wartości analogowych (wartość napięcia proporcjonalna do oświetlenia odpowiedniego fotorezystora)
+   //średnia wartości sygnałów fotorezystorów górnego rzędu
+  //średnia wartości sygnałów fotorezystorów dolnego rzędu
+  //średnia wartości sygnałów fotorezystorów lewej kolumny
+ //średnia wartości sygnałów fotorezystorów prawej kolumny
+  // wyświetlenie wartości sygnałów odczytanych z wejść analogowych, do których są dołączone fotorezystory
+  // wyświetlenie wartości sygnałów odczytanych z wejść analogowych, kreślarka
+ 
+  // główny program sterowanie
+   
+  // porównanie średniej sygnałów fotorezystorów górnego i dolnego rzędu odpowiada za sterowanie osią elewacji (pion)
+  {
+    servoverti.write(servov +1);  // wartośc poprzednia plus 1 i wysłanie jej na serwo
+      // jeżeli wartość sygnału sterującego serwomechnizmem jest poniżej dolnego ograniczenia
+    // ustawienie wartosći sygnału sterującego serwomechnizmem na poziomie dolnego ograniczenia
+  }
+  // porównanie średniej sygnałów fotorezystorów górnego i dolnego rzędu odpowiada za sterowanie osią elewacji (pion)
+  {
+    servoverti.write(servov -1);
+  // jeżeli wartość sygnału sterującego serwomechnizmem jest poniżej dolnego ograniczenia
+   // ustawienie wartosći sygnału sterującego serwomechnizmem na poziomie dolnego ograniczenia
+    delay(10);                  // opóżnienie umożliwiające osiągnięcie przez serwomechanizm zadanaj pozycji
+    servoverti.write(servov);    //zmiana sygnalu sterującego serwomechanizmu
+  }
+   // porównanie średniej sygnałów fotorezystorów lewej i prawej kolumny odpowiada za sterowanie osią azymutu (poziom)
+  {
+    servohori.write(servoh +1);      // ruch w górę
+    servohori.write(servoh);    //zmiana sygnalu sterującego serwomechanizmu
+  }
+  delay(50);
+}
