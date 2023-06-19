@@ -1,0 +1,651 @@
+//lewa cyfra Digit Left
+#define DLa 2
+#define DLb 3
+#define DLc 4
+#define DLd 5
+#define DLe 6
+#define DLf 7
+#define DLg 8
+#define DLdp 9
+#define DLkat 10
+
+//prawa cyfra Digit Right
+#define DRa 11
+#define DRb 12
+#define DRc 13
+#define DRd A0
+#define DRe A1
+#define DRf A2
+#define DRg A3
+#define DRdp A4
+#define DRkat A5
+
+
+struct port_nazwa
+{
+  String opis;
+  int port;
+};
+
+port_nazwa tab_port_DL[9], tab_port_DR[9];
+bool kierunek_segment = true;
+void init_tab_port_DL()
+{
+  port_nazwa pin;
+ 
+  for (int i=2; i<=8; i++)
+  {
+    pin.opis="DL"+(String) (char(95+i));
+    pin.port=i;
+    tab_port_DL[i-2]=pin;
+   }
+    pin.opis="DLdp";
+    pin.port=9;
+    tab_port_DL[7]=pin;
+   
+    pin.opis="DLkat";
+    pin.port=10;
+    tab_port_DL[8]=pin;
+}
+
+void wypisz_tab_port (port_nazwa tab_port[9])
+{
+Serial.println("Nowa tablica");
+Serial.println("");
+
+for(int i=0; i<9; i++)
+{
+   Serial.print("Element :"); Serial.println(i);
+   Serial.println(tab_port[i].opis);
+   Serial.println(tab_port[i].port);
+}
+ 
+}
+
+void init_tab_port_DR()
+{
+  port_nazwa pin;
+for (int i=2; i<=8; i++)
+{
+pin.opis="DR"+(String) (char(95+i));
+pin.port=i+9;
+tab_port_DR[i-2]=pin;
+}
+pin.opis="DRdp";
+pin.port=18;
+tab_port_DR[7]=pin;
+pin.opis="DRkat";
+pin.port=19;
+tab_port_DR[8]=pin;
+}
+
+void DLtest_kropki()
+{
+  //wlaczenie katody lewej cyfry
+  digitalWrite(DLkat, HIGH);
+ 
+  digitalWrite(DLdp, HIGH);
+ 
+  delay(1000);
+  digitalWrite(DLkat, LOW);
+
+  //wylaczenie katody lewej cyfry
+  digitalWrite(DLdp, LOW);
+ 
+  delay(1000);
+}
+
+void DRtest_kropki()
+{
+//wlaczenie katody prawej cyfry
+digitalWrite(DRkat, HIGH);
+digitalWrite(DRdp, HIGH);
+delay(1000);
+digitalWrite(DRkat, LOW);
+//wylaczenie katody prawej cyfry
+digitalWrite(DRdp, LOW);
+delay(1000);
+}
+
+void test_segmentow_lewy(port_nazwa tab_port[9])
+{
+  //wlaczenie katody
+  digitalWrite(tab_port[8].port, 1);
+ 
+  for(int licznik=0; licznik<8; licznik++)
+  {
+    digitalWrite(tab_port[licznik].port, 1);
+    delay(500);
+    digitalWrite(tab_port[licznik].port, 0);
+    delay(500);
+  }
+  digitalWrite(tab_port[8].port, 0);
+}
+
+void test_segmentow_prawy(port_nazwa tab_port[9])
+{
+digitalWrite(19,1);
+
+for(int i=11;i<=16;i++)
+{
+digitalWrite(i,1);
+delay(500);
+digitalWrite(i,0);
+delay(500);
+}
+digitalWrite(tab_port[8].port, 0);
+}
+
+void wlacz(port_nazwa tab_port[9])
+{
+//wlaczenie katody
+digitalWrite(tab_port[8].port,1);
+for (int i=0; i<8; i++){
+digitalWrite(tab_port[i].port,1);
+}
+delay(400);
+}
+
+void wylacz(port_nazwa tab_port[9])
+{
+//wylaczenie katody i to w zasadzie wystarczy, ale
+digitalWrite(tab_port[8].port,0);
+for (int i=0; i<8; i++)
+digitalWrite(tab_port[i].port,0);
+}
+
+void wypiszSegmentyKierunek(bool kierunek_segment)
+{
+if(kierunek_segment == true)
+{
+digitalWrite(10, 1);
+for (int i=2;i<=8;i++)
+{
+digitalWrite(i,1);
+delay(500);
+digitalWrite(i,0);
+delay(500);
+}
+digitalWrite(10,0);
+
+digitalWrite(19,1);
+for (int i=11;i<=17;i++)
+{
+digitalWrite(i,1);
+delay(500);
+digitalWrite(i,0);
+delay(500);
+}
+digitalWrite(19,0);
+}
+else
+{
+digitalWrite(19,1);
+
+for (int i=17;i>=11;i--)
+{
+digitalWrite(i,1);
+delay(500);
+digitalWrite(i,0);
+delay(500);
+}
+digitalWrite(19,0);
+
+digitalWrite(10, 1);
+
+for (int i=8;i>=2;i--)
+{
+digitalWrite(i,1);
+delay(500);
+digitalWrite(i,0);
+delay(500);
+}
+digitalWrite(10,0);
+}
+}
+
+void cyfryArab(){
+digitalWrite(19,1);
+for(int i=11;i<=16;i++){
+digitalWrite(i,1);
+}
+delay(1000);
+digitalWrite(19,0);
+for(int i=11;i<=16;i++){
+digitalWrite(i,0);
+}
+digitalWrite(12,1);
+digitalWrite(13,1);
+digitalWrite(19,1);
+delay(500);
+digitalWrite(19,0);
+digitalWrite(13,0);
+digitalWrite(11, 1);
+digitalWrite(17,1);
+digitalWrite(15,1);
+digitalWrite(14,1);
+digitalWrite(19,1);
+delay(500);
+digitalWrite(13,1);
+digitalWrite(15,0);
+delay(500);
+digitalWrite(11,0);
+digitalWrite(14,0);
+digitalWrite(16,1);
+delay(500);
+digitalWrite(19,0);
+for(int i=11;i<=17;i++){
+digitalWrite(i,1);
+}
+digitalWrite(12,0);
+digitalWrite(15,0);
+digitalWrite(19,1);
+delay(500);
+digitalWrite(19,0);
+for(int i=11;i<=17;i++){
+digitalWrite(i,1);
+}
+digitalWrite(12,0);
+digitalWrite(19,1);
+delay(500);
+digitalWrite(19,0);
+for(int i=11;i<=17;i++){
+digitalWrite(i,1);
+}
+digitalWrite(15,0);
+digitalWrite(14,0);
+digitalWrite(16,0);
+digitalWrite(17,0);
+digitalWrite(19,1);
+delay(500);
+digitalWrite(19,0);
+for(int i=11;i<=17;i++){
+digitalWrite(i,1);
+}
+digitalWrite(19,1);
+delay(500);
+digitalWrite(19,0);
+for(int i=11;i<=17;i++){
+digitalWrite(i,1);
+}
+digitalWrite(14,0);
+digitalWrite(15,0);
+digitalWrite(19,1);
+delay(500);
+digitalWrite(19,0);
+for(int i=11;i<=17;i++){
+digitalWrite(i,0);
+}
+}
+
+void waz(bool kierunek_segment){
+if(kierunek_segment ==true){
+for (int i=2; i<6;i++){
+digitalWrite(i,1);
+digitalWrite(i+1, 1);
+//digitalWrite(i+2, 1);
+digitalWrite(10,1);
+delay(500);
+digitalWrite(10,0);
+for(int i=2; i<=8;i++){
+digitalWrite(i,0);
+}
+}
+}
+else{
+//odwrocony for
+for(int i=7; i>=4;i--){
+digitalWrite(i,1);
+digitalWrite(i-1, 1);
+//digitalWrite(i-2,1);
+digitalWrite(10,1);
+delay(500);
+digitalWrite(10,0);
+for(int i=2; i<=8;i++){
+digitalWrite(i,0);
+}
+}
+}
+}
+
+void ala(){
+for(int i=11;i<=17;i++){
+digitalWrite(i,1);
+}
+digitalWrite(14,0);
+digitalWrite(19,1);
+delay(500);
+digitalWrite(19,0);
+for(int i=2;i<=8;i++){
+digitalWrite(i,1);
+}
+digitalWrite(5,0);
+for(int i=11;i<=17;i++){
+digitalWrite(i,0);
+}
+digitalWrite(16,1);
+digitalWrite(15,1);
+digitalWrite(14,1);
+digitalWrite(19,1);
+digitalWrite(10,1);
+delay(500);
+digitalWrite(19,0);
+digitalWrite(10,0);
+for(int i=11;i<=16;i++){
+digitalWrite(i,0);
+}
+for(int i=2;i<=8;i++){
+digitalWrite(i,0);
+}
+digitalWrite(5,1);
+digitalWrite(7,1);
+digitalWrite(6,1);
+digitalWrite(10,1);
+delay(500);
+for(int i=2;i<=8;i++){
+digitalWrite(i,0);
+for(int i=11;i<=17;i++){
+digitalWrite(i,1);
+}
+digitalWrite(14,0);
+digitalWrite(19,1);
+delay(500);
+digitalWrite(19,0);
+for(int i=11;i<=17;i++){
+digitalWrite(i,0);
+}
+}
+}
+
+void ola()
+{
+digitalWrite(10, 1);
+for (int i=2;i<=8;i++)
+{
+digitalWrite(2,1);
+digitalWrite(3,1);
+digitalWrite(4,1);
+digitalWrite(5,1);
+digitalWrite(6,1);
+digitalWrite(7,1);
+}
+digitalWrite(10, 0);
+delay(500);
+digitalWrite(19,1);
+for (int i=11;i<=17;i++)
+{
+digitalWrite(13,1);
+digitalWrite(14,1);
+digitalWrite(15,1);
+}
+digitalWrite(19,0);
+delay(500);
+digitalWrite(10, 1);
+for (int i=2;i<=8;i++)
+{
+digitalWrite(2,1);
+digitalWrite(3,1);
+digitalWrite(4,1);
+digitalWrite(6,1);
+digitalWrite(7,1);
+digitalWrite(8,1);
+}
+digitalWrite(10, 0);
+}
+void wlaczDL(){
+for(int i = 2; i< 9; i++){
+digitalWrite(i, 1);
+}
+}
+void wylaczDL(){
+digitalWrite(DLkat, 0);
+for(int i = 2; i< 9; i++){
+digitalWrite(i, 0);
+}
+}
+void wlaczDR(){
+for(int i = 11; i< 18; i++){
+digitalWrite(i, 1);
+}
+}
+void wylaczDR(){
+digitalWrite(DRkat, 0);
+for(int i = 11; i< 18; i++){
+digitalWrite(i, 0);
+}
+}
+void wypiszCyfreL(int cyfra){
+switch(cyfra){
+case 0:wlaczDL();
+digitalWrite(DLg, 0);
+digitalWrite(10,1);
+break;
+case 1:
+digitalWrite(DLb, 1);
+digitalWrite(DLc, 1);
+digitalWrite(DLkat,1);
+break;
+case 2:
+wlaczDL();
+digitalWrite(DLf, 0);
+digitalWrite(DLc, 0);
+digitalWrite(DLkat,1);
+break;
+case 3:
+wlaczDL();
+digitalWrite(DLf, 0);
+digitalWrite(DLe, 0);
+digitalWrite(DLkat,1);
+break;
+case 4:
+wlaczDL();
+digitalWrite(DLa, 0);
+digitalWrite(DLe, 0);
+digitalWrite(DLd, 0);
+digitalWrite(DLkat,1);
+break;
+case 5:
+wlaczDL();
+digitalWrite(DLb, 0);
+digitalWrite(DLe, 0);
+digitalWrite(DLkat,1);
+break;
+case 6:
+wlaczDL();
+digitalWrite(DLb, 0);
+digitalWrite(DLkat,1);
+break;
+case 7:digitalWrite(DLa, 1);
+digitalWrite(DLb, 1);
+digitalWrite(DLc, 1);
+digitalWrite(DLkat,1);
+break;
+case 8:
+wlaczDL();
+digitalWrite(DLkat,1);
+break;
+case 9:
+wlaczDL();
+digitalWrite(DLe, 0);
+digitalWrite(DLkat,1);
+break;
+}
+}
+void wypiszCyfreR(int cyfra){
+switch(cyfra){
+case 0:
+wlaczDR();
+digitalWrite(DRg, 0);
+digitalWrite(DRkat,1);
+break;
+case 1:
+digitalWrite(DRb, 1);
+digitalWrite(DRc, 1);
+digitalWrite(DRkat,1);
+break;
+case 2:
+wlaczDR();
+digitalWrite(DRf, 0);
+digitalWrite(DRc, 0);
+digitalWrite(DRkat,1);
+break;
+case 3:
+wlaczDR();
+digitalWrite(DRf, 0);
+digitalWrite(DRe, 0);
+digitalWrite(DRkat,1);
+break;
+case 4:
+wlaczDR();
+digitalWrite(DRa, 0);
+digitalWrite(DRe, 0);
+digitalWrite(DRd, 0);
+digitalWrite(DRkat,1);
+break;
+case 5:
+wlaczDR();
+digitalWrite(DRb, 0);
+digitalWrite(DRe, 0);
+digitalWrite(DRkat,1);
+break;
+case 6:
+wlaczDR();
+digitalWrite(DRb, 0);
+digitalWrite(DRkat,1);
+break;
+case 7:
+digitalWrite(DRa, 1);
+digitalWrite(DRb, 1);
+digitalWrite(DRc, 1);
+digitalWrite(DRkat,1);
+break;
+case 8:
+wlaczDR();
+digitalWrite(DRkat,1);
+break;
+case 9:
+wlaczDR();
+digitalWrite(DRe, 0);
+digitalWrite(DRkat,1);
+break;
+}
+}
+
+void czytaj_konsole()
+{
+  String wczytany_string = "";
+  char tab[10];
+  char znak;
+  int licznik=0;
+ 
+//...
+
+  if(Serial.available() > 0) //czy są dane do wczytania?
+  {
+   
+    Serial.println("wczytano " + wczytany_string  );
+//...
+        znak=wczytany_string.charAt(0);
+//...       
+        wczytany_string.remove(0,1);
+//...       
+  }
+}
+
+void setup() {
+  // put your setup code here, to run once:
+Serial.begin(9600);
+Serial.println("wystartowal");
+
+//konfiguracja portów
+//DL
+pinMode(DLa, OUTPUT);
+digitalWrite(DLa, LOW);
+pinMode(DLb, OUTPUT);
+digitalWrite(DLb, LOW);
+pinMode(DLc, OUTPUT);
+digitalWrite(DLc, LOW);
+pinMode(DLd, OUTPUT);
+digitalWrite(DLd, LOW);
+pinMode(DLe, OUTPUT);
+digitalWrite(DLe, LOW);
+pinMode(DLf, OUTPUT);
+digitalWrite(DLf, LOW);
+pinMode(DLg, OUTPUT);
+digitalWrite(DLg, LOW);
+pinMode(DLdp, OUTPUT);
+digitalWrite(DLdp, LOW);
+pinMode(DLkat, OUTPUT);
+digitalWrite(DLkat, LOW);
+
+//DR
+pinMode(DRa, OUTPUT);
+digitalWrite(DRa, LOW);
+pinMode(DRb, OUTPUT);
+digitalWrite(DRb, LOW);
+pinMode(DRc, OUTPUT);
+digitalWrite(DRc, LOW);
+pinMode(DRd, OUTPUT);
+digitalWrite(DRd, LOW);
+pinMode(DRe, OUTPUT);
+digitalWrite(DRe, LOW);
+pinMode(DRf, OUTPUT);
+digitalWrite(DRf, LOW);
+pinMode(DRg, OUTPUT);
+digitalWrite(DRg, LOW);
+pinMode(DRdp, OUTPUT);
+digitalWrite(DRdp, LOW);
+pinMode(DRkat, OUTPUT);
+digitalWrite(DRkat, LOW);
+
+init_tab_port_DL();
+wypisz_tab_port(tab_port_DL);
+
+}
+
+void loop()
+{
+// put your main code here, to run repeatedly:
+DLtest_kropki();
+DRtest_kropki();
+
+test_segmentow_lewy(tab_port_DL);
+test_segmentow_prawy(tab_port_DR);
+
+wlacz(tab_port_DL);
+wylacz(tab_port_DL);
+wlacz(tab_port_DR);
+wylacz(tab_port_DR);
+
+wypiszSegmentyKierunek(1); // skazowki zegara
+wypiszSegmentyKierunek(0); // w przeciwno
+
+waz(1); // skazowki zegara
+waz(0); // w przeciwno
+
+ala();
+//ola();
+
+cyfryArab();
+float randLiczba = random(1, 301)/100.0; //będą dwa miejsca poprzecinku
+Serial.println(randLiczba);
+delay(1000);
+//kod do wyświetlania po jednej cyfrze float'a na DR
+char buffer[6];
+dtostrf(randLiczba, 4, 2, buffer);
+for(int j = 0; j < 6; j++){
+if(buffer[j] != '.'){
+wypiszCyfreR(buffer[j] - '0');
+delay(500);
+wylaczDR();
+}else{
+digitalWrite(DRdp, 1);
+digitalWrite(DRkat, 1);
+delay(500);
+digitalWrite(DRdp,0);
+wylaczDR();
+}
+}
+delay(1500);
+czytaj_konsole();
+}
