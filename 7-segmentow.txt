@@ -827,7 +827,7 @@ void loop()
 {
   // put your main code here, to run repeatedly:
 
- /*   ZADANIE 1-2
+  /* ZADANIE 1-2
   
   DLtest_kropki();
 
@@ -843,38 +843,39 @@ void loop()
   
  wylacz(tab_port_DL);
 
- wylacz(tab_port_DR); */        
+ wylacz(tab_port_DR);  */       
 
 
- /*   ZADANIE 3
+   //ZADANIE 3
   
- KierunekSegmentow(1);
+ //KierunekSegmentow(1);
 
- KierunekSegmentow(0);*/
+ //KierunekSegmentow(0);
 
- /*    ZADANIE 4  
- waz(1);
- waz(0); */
+ //    ZADANIE 4  
+ //waz(1);
+ //waz(0); 
  
-/*    ZADANIE 5
-Wyswietl_Ala();
-Wyswietl_error();
- Wyswietl_ola(); 
-                  */
+    //ZADANIE 5
+//Wyswietl_Ala();
+//Wyswietl_error();
+ //Wyswietl_ola(); 
+                  
 
- /*    ZADANIE 6
-wyswietl_cyfry_arabskie(); */
+ //   ZADANIE 6
+//wyswietl_cyfry_arabskie(); 
 
 
-    /*ZADANIE 7
-int cyfra = wczytaj_cyfre();
+    //ZADANIE 7
+/*int cyfra = wczytaj_cyfre();
 if(cyfra >= 0 && cyfra <= 9)
 {
   wyswietlWczytana(cyfra);
   wyswietlWczytana(cyfra);
-  delay(1000);*/
+  delay(1000);
+}*/
 
- /* float Liczba = random(1,100)/100.0;
+  /*float Liczba = random(1,100)/100.0;
   Serial.println(Liczba);
   delay(500);
   char bufer[6];
@@ -900,6 +901,8 @@ if(cyfra >= 0 && cyfra <= 9)
       delay(1000);
       konsola();     */
 
+
+// ZADANIE 8
 float randLiczba = random(1, 100)/100.0; //będą dwa miejsca poprzecinku
 Serial.println(randLiczba);
 delay(1000);
@@ -920,6 +923,6 @@ wylaczDR();
 }
 }
 delay(1500);
-konsola();
+konsola(); 
 
 }
