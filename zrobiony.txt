@@ -255,6 +255,7 @@ digitalWrite(i,0);
 
 void wyswietl_cyfre(int cyfra)
 {
+  
   switch (cyfra)
   {
     case 0:
@@ -339,6 +340,8 @@ void wyswietl_cyfre(int cyfra)
   }
 }
 
+
+
 void wyswietl_cyfry_arabskie()
 {
   for (int i = 0; i < 10; i++)
@@ -380,6 +383,393 @@ void Wyswietl_Ala()
       digitalWrite(DRg, 1);
       digitalWrite(DRc, 1);
       delay(10000);
+}
+
+void Wyswietl_error()
+{
+   digitalWrite(10,1);
+   digitalWrite(19,1);
+      digitalWrite(DLa, 1);
+      digitalWrite(DLf, 1);
+      digitalWrite(DLg, 1);
+      digitalWrite(DLe, 1);
+      digitalWrite(DLd, 1);
+    delay(500);
+      digitalWrite(DRg, 1);
+      digitalWrite(DRe, 1);
+    delay(500);
+     digitalWrite(DLa, 0);
+      digitalWrite(DLf, 0);
+      digitalWrite(DLd, 0);
+      digitalWrite(DLg, 1);
+      digitalWrite(DLe, 1);
+       delay(500);
+      digitalWrite(DRg, 1);
+      digitalWrite(DRe, 1);
+      delay(500);
+      digitalWrite(DRg, 1);
+      digitalWrite(DRe, 1);
+      digitalWrite(DRd, 1);
+      digitalWrite(DRc, 1);
+      delay(500);
+      digitalWrite(DLg, 1);
+      digitalWrite(DLe, 1);
+      digitalWrite(DLd, 1);
+      digitalWrite(DLc, 1);
+      digitalWrite(DRd, 0);
+      digitalWrite(DRc, 0);
+      delay(500);
+      digitalWrite(DRe, 1);
+      digitalWrite(DRg, 1);
+      delay(10000);
+      
+}
+
+void Wyswietl_ola()
+{
+  digitalWrite(10,1);
+  digitalWrite(19,1);
+      digitalWrite(DLa, 1);
+      digitalWrite(DLf, 1);
+      digitalWrite(DLb, 1);
+      digitalWrite(DLe, 1);
+      digitalWrite(DLd, 1);
+      digitalWrite(DLc, 1);
+    delay(500);
+      digitalWrite(DRf, 1);
+      digitalWrite(DRd, 1);
+      digitalWrite(DRe, 1);
+    delay(500);
+      digitalWrite(DLa, 0);
+      digitalWrite(DLf, 1);
+      digitalWrite(DLb, 0);
+      digitalWrite(DLe, 1);
+      digitalWrite(DLd, 1);
+      digitalWrite(DLc, 0);
+      delay(500);
+       digitalWrite(DRd, 0);
+      digitalWrite(DRf, 1);
+      digitalWrite(DRb, 1);
+      digitalWrite(DRg, 1);
+      digitalWrite(DRe, 1);
+      digitalWrite(DRc, 1);
+      digitalWrite(DRa, 1);
+    delay(10000);
+      
+}
+
+
+void wyswietlWczytana(int cyfra)
+{
+ /*  for(int i = 0; i < 9; i++)
+  {
+    digitalWrite(tab_port[i].port, 1);
+  } */
+   switch (cyfra)
+  {
+    case 0:
+      digitalWrite(10,1);
+      digitalWrite(19,1);
+      digitalWrite(DLa, 1);
+      digitalWrite(DLb, 1);
+      digitalWrite(DLc, 1);
+      digitalWrite(DLd, 1);
+      digitalWrite(DLe, 1);
+      digitalWrite(DLf, 1);
+      digitalWrite(DRa, 1);
+      digitalWrite(DRb, 1);
+      digitalWrite(DRc, 1);
+      digitalWrite(DRd, 1);
+      digitalWrite(DRe, 1);
+      digitalWrite(DRf, 1);
+      delay(500);
+      digitalWrite(DRa, 0);
+      digitalWrite(DRb, 0);
+      digitalWrite(DRc, 0);
+      digitalWrite(DRd, 0);
+      digitalWrite(DRe, 0);
+      digitalWrite(DRf, 0);
+      break;
+    case 1:
+      digitalWrite(19,1);
+      digitalWrite(DLa, 1);
+      digitalWrite(DLb, 1);
+      digitalWrite(DLc, 1);
+      digitalWrite(DLd, 1);
+      digitalWrite(DLe, 1);
+      digitalWrite(DLf, 1);
+      digitalWrite(10,1);
+      digitalWrite(DRb, 1);
+      digitalWrite(DRc, 1);
+      delay(500);
+      digitalWrite(DRb, 0);
+      digitalWrite(DRc, 0);
+      break;
+    case 2:;
+      digitalWrite(10,1);
+      digitalWrite(19,1);
+      digitalWrite(DLa, 1);
+      digitalWrite(DLb, 1);
+      digitalWrite(DLc, 1);
+      digitalWrite(DLd, 1);
+      digitalWrite(DLe, 1);
+      digitalWrite(DLf, 1);
+      digitalWrite(DRa, 1);
+      digitalWrite(DRb, 1);
+      digitalWrite(DRg, 1);
+      digitalWrite(DRe, 1);
+      digitalWrite(DRd, 1);
+      delay(500);
+      digitalWrite(DRa, 0);
+      digitalWrite(DRb, 0);
+      digitalWrite(DRg, 0);
+      digitalWrite(DRe, 0);
+      digitalWrite(DRd, 0);
+      break;
+    case 3:
+      digitalWrite(10,1);
+      digitalWrite(19,1);
+      digitalWrite(DLa, 1);
+      digitalWrite(DLb, 1);
+      digitalWrite(DLc, 1);
+      digitalWrite(DLd, 1);
+      digitalWrite(DLe, 1);
+      digitalWrite(DLf, 1);
+      digitalWrite(DRa, 1);
+      digitalWrite(DRb, 1);
+      digitalWrite(DRg, 1);
+      digitalWrite(DRc, 1);
+      digitalWrite(DRd, 1);
+      delay(500);
+      digitalWrite(DRa, 0);
+      digitalWrite(DRb, 0);
+      digitalWrite(DRg, 0);
+      digitalWrite(DRc, 0);
+      digitalWrite(DRd, 0);
+      break;
+    case 4:
+      digitalWrite(10,1);
+      digitalWrite(19,1);
+      digitalWrite(DLa, 1);
+      digitalWrite(DLb, 1);
+      digitalWrite(DLc, 1);
+      digitalWrite(DLd, 1);
+      digitalWrite(DLe, 1);
+      digitalWrite(DLf, 1);
+      digitalWrite(DRf, 1);
+      digitalWrite(DRg, 1);
+      digitalWrite(DRb, 1);
+      digitalWrite(DRc, 1);
+      delay(500);
+      digitalWrite(DRf, 0);
+      digitalWrite(DRg, 0);
+      digitalWrite(DRb, 0);
+      digitalWrite(DRc, 0);
+      break;
+    case 5:
+      digitalWrite(10,1);
+      digitalWrite(19,1);
+      digitalWrite(DLa, 1);
+      digitalWrite(DLb, 1);
+      digitalWrite(DLc, 1);
+      digitalWrite(DLd, 1);
+      digitalWrite(DLe, 1);
+      digitalWrite(DLf, 1);
+      digitalWrite(DRa, 1);
+      digitalWrite(DRf, 1);
+      digitalWrite(DRg, 1);
+      digitalWrite(DRc, 1);
+      digitalWrite(DRd, 1);
+      delay(500);
+      digitalWrite(DRa, 0);
+      digitalWrite(DRf, 0);
+      digitalWrite(DRg, 0);
+      digitalWrite(DRc, 0);
+      digitalWrite(DRd, 0);
+      break;
+    case 6:
+      digitalWrite(10,1);
+      digitalWrite(19,1);
+      digitalWrite(DLa, 1);
+      digitalWrite(DLb, 1);
+      digitalWrite(DLc, 1);
+      digitalWrite(DLd, 1);
+      digitalWrite(DLe, 1);
+      digitalWrite(DLf, 1);
+      digitalWrite(DRa, 1);
+      digitalWrite(DRf, 1);
+      digitalWrite(DRg, 1);
+      digitalWrite(DRc, 1);
+      digitalWrite(DRd, 1);
+      digitalWrite(DRe, 1);
+      delay(500);
+      digitalWrite(DRa, 0);
+      digitalWrite(DRf, 0);
+      digitalWrite(DRg, 0);
+      digitalWrite(DRc, 0);
+      digitalWrite(DRd, 0);
+      digitalWrite(DRe, 0);
+      break;
+    case 7:
+      digitalWrite(10,1);
+      digitalWrite(19,1);
+      digitalWrite(DLa, 1);
+      digitalWrite(DLb, 1);
+      digitalWrite(DLc, 1);
+      digitalWrite(DLd, 1);
+      digitalWrite(DLe, 1);
+      digitalWrite(DLf, 1);
+      digitalWrite(DRa, 1);
+      digitalWrite(DRb, 1);
+      digitalWrite(DRc, 1);
+      delay(500);
+      digitalWrite(DRa, 0);
+      digitalWrite(DRb, 0);
+      digitalWrite(DRc, 0);
+      break;
+    case 8:
+    digitalWrite(10,1);
+    digitalWrite(19,1);
+      digitalWrite(DLa, 1);
+      digitalWrite(DLb, 1);
+      digitalWrite(DLc, 1);
+      digitalWrite(DLd, 1);
+      digitalWrite(DLe, 1);
+      digitalWrite(DLf, 1);
+      digitalWrite(DRa, 1);
+      digitalWrite(DRb, 1);
+      digitalWrite(DRc, 1);
+      digitalWrite(DRd, 1);
+      digitalWrite(DRe, 1);
+      digitalWrite(DRf, 1);
+      digitalWrite(DRg, 1);
+      delay(500);
+      digitalWrite(DRa, 0);
+      digitalWrite(DRb, 0);
+      digitalWrite(DRc, 0);
+      digitalWrite(DRd, 0);
+      digitalWrite(DRe, 0);
+      digitalWrite(DRf, 0);
+      digitalWrite(DRg, 0);
+      break;
+    case 9:
+      digitalWrite(10,1);
+      digitalWrite(19,1);
+      digitalWrite(DLa, 1);
+      digitalWrite(DLb, 1);
+      digitalWrite(DLc, 1);
+      digitalWrite(DLd, 1);
+      digitalWrite(DLe, 1);
+      digitalWrite(DLf, 1);
+      digitalWrite(DRa, 1);
+      digitalWrite(DRb, 1);
+      digitalWrite(DRc, 1);
+      digitalWrite(DRd, 1);
+      digitalWrite(DRf, 1);
+      digitalWrite(DRg, 1);
+      delay(500);
+      digitalWrite(DRa, 0);
+      digitalWrite(DRb, 0);
+      digitalWrite(DRc, 0);
+      digitalWrite(DRd, 0);
+      digitalWrite(DRf, 0);
+      digitalWrite(DRg, 0);
+      break;
+  }
+}
+
+int wczytaj_cyfre()
+{
+  while(!Serial.available());
+  return Serial.read() - '0';
+}
+
+void konsola()
+{
+  String string = "";
+  char tab[10];
+  char znak;
+  int licznik=0;
+
+  if(Serial.available() > 0)
+  {
+    Serial.println(string);
+    znak = string.charAt(0);
+    string.remove(0,1);
+  }
+}
+
+void wylaczDR()
+{
+  for(int i = 11; i <18; i++)
+  {
+    digitalWrite(i, 0);
+  }
+}
+void wlaczDR(){
+for(int i = 11; i< 18; i++){
+digitalWrite(i, 1);
+}
+}
+
+void wypiszCyfreR(int cyfra){
+switch(cyfra){
+case 0:
+wlaczDR();
+digitalWrite(DRg, 0);
+digitalWrite(DRkat,1);
+break;
+case 1:
+digitalWrite(DRb, 1);
+digitalWrite(DRc, 1);
+digitalWrite(DRkat,1);
+break;
+case 2:
+wlaczDR();
+digitalWrite(DRf, 0);
+digitalWrite(DRc, 0);
+digitalWrite(DRkat,1);
+break;
+case 3:
+wlaczDR();
+digitalWrite(DRf, 0);
+digitalWrite(DRe, 0);
+digitalWrite(DRkat,1);
+break;
+case 4:
+wlaczDR();
+digitalWrite(DRa, 0);
+digitalWrite(DRe, 0);
+digitalWrite(DRd, 0);
+digitalWrite(DRkat,1);
+break;
+case 5:
+wlaczDR();
+digitalWrite(DRb, 0);
+digitalWrite(DRe, 0);
+digitalWrite(DRkat,1);
+break;
+case 6:
+wlaczDR();
+digitalWrite(DRb, 0);
+digitalWrite(DRkat,1);
+break;
+case 7:
+digitalWrite(DRa, 1);
+digitalWrite(DRb, 1);
+digitalWrite(DRc, 1);
+digitalWrite(DRkat,1);
+break;
+case 8:
+wlaczDR();
+digitalWrite(DRkat,1);
+break;
+case 9:
+wlaczDR();
+digitalWrite(DRe, 0);
+digitalWrite(DRkat,1);
+break;
+}
 }
 
 void setup() {
@@ -465,11 +855,71 @@ void loop()
  /*    ZADANIE 4  
  waz(1);
  waz(0); */
+ 
+/*    ZADANIE 5
+Wyswietl_Ala();
+Wyswietl_error();
+ Wyswietl_ola(); 
+                  */
 
-/*    ZADANIE 6
+ /*    ZADANIE 6
 wyswietl_cyfry_arabskie(); */
 
-/*    ZADANIE 5
-Wyswietl_Ala(); */
+
+    /*ZADANIE 7
+int cyfra = wczytaj_cyfre();
+if(cyfra >= 0 && cyfra <= 9)
+{
+  wyswietlWczytana(cyfra);
+  wyswietlWczytana(cyfra);
+  delay(1000);*/
+
+ /* float Liczba = random(1,100)/100.0;
+  Serial.println(Liczba);
+  delay(500);
+  char bufer[6];
+
+  dtostrf(Liczba, 4, 2, bufer);
+  for(int i = 0; i < 6; i++)
+  {
+    if(bufer[i] != '.')
+    {
+      wyswietl_cyfre(bufer[i]-'0');
+      delay(500);
+      wylaczDR();
+    }
+    else
+    {
+      digitalWrite(DLdp,1);
+      digitalWrite(DLkat, 1);
+      delay(500);
+      digitalWrite(DLdp, 0);
+      wylaczDR();
+    }
+} 
+      delay(1000);
+      konsola();     */
+
+float randLiczba = random(1, 100)/100.0; //będą dwa miejsca poprzecinku
+Serial.println(randLiczba);
+delay(1000);
+//kod do wyświetlania po jednej cyfrze float'a na DR
+char buffer[6];
+dtostrf(randLiczba, 4, 2, buffer);
+for(int j = 0; j < 6; j++){
+if(buffer[j] != '.'){
+wypiszCyfreR(buffer[j] - '0');
+delay(500);
+wylaczDR();
+}else{
+digitalWrite(DRdp, 1);
+digitalWrite(DRkat, 1);
+delay(500);
+digitalWrite(DRdp,0);
+wylaczDR();
+}
+}
+delay(1500);
+konsola();
 
 }
